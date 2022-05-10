@@ -1,0 +1,73 @@
+current directory: /Users/ishigurotasuku/workspace/Portfolio/test2/app_test/vendor/bundle/ruby/2.7.0/gems/google-protobuf-3.20.1/ext/google/protobuf_c
+/Users/ishigurotasuku/.rbenv/versions/2.7.4/bin/ruby -I /Users/ishigurotasuku/.rbenv/versions/2.7.4/lib/ruby/site_ruby/2.7.0 -r ./siteconf20220509-39849-1ctnksd.rb extconf.rb
+creating Makefile
+
+current directory: /Users/ishigurotasuku/workspace/Portfolio/test2/app_test/vendor/bundle/ruby/2.7.0/gems/google-protobuf-3.20.1/ext/google/protobuf_c
+make DESTDIR\= clean
+
+current directory: /Users/ishigurotasuku/workspace/Portfolio/test2/app_test/vendor/bundle/ruby/2.7.0/gems/google-protobuf-3.20.1/ext/google/protobuf_c
+make DESTDIR\=
+compiling protobuf.c
+protobuf.c:63:30: warning: redefinition of typedef 'StringBuilder' is a C11 feature [-Wtypedef-redefinition]
+typedef struct StringBuilder StringBuilder;
+                             ^
+./protobuf.h:92:30: note: previous definition is here
+typedef struct StringBuilder StringBuilder;
+                             ^
+1 warning generated.
+compiling convert.c
+convert.c:229:9: warning: variable 'ret' is used uninitialized whenever switch default is taken [-Wsometimes-uninitialized]
+        default:
+        ^~~~~~~
+convert.c:237:10: note: uninitialized use occurs here
+  return ret;
+         ^~~
+convert.c:132:3: note: variable 'ret' is declared here
+  upb_MessageValue ret;
+  ^
+1 warning generated.
+compiling defs.c
+compiling message.c
+compiling repeated_field.c
+compiling map.c
+compiling ruby-upb.c
+ruby-upb.c:1023:36: warning: comparison of integers of different signs: 'size_t' (aka 'unsigned long') and 'int' [-Wsign-compare]
+    for (idx = l->dense_below; idx < last; idx++) {
+                               ~~~ ^ ~~~~
+ruby-upb.c:3110:9: warning: comparison of integers of different signs: 'intptr_t' (aka 'long') and 'const size_t' (aka 'const unsigned long') [-Wsign-compare]
+  if (i < t->array_size) {
+      ~ ^ ~~~~~~~~~~~~~
+ruby-upb.c:3111:16: warning: comparison of integers of different signs: 'intptr_t' (aka 'long') and 'const size_t' (aka 'const unsigned long') [-Wsign-compare]
+    while (++i < t->array_size) {
+           ~~~ ^ ~~~~~~~~~~~~~
+ruby-upb.c:3136:9: warning: comparison of integers of different signs: 'intptr_t' (aka 'long') and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+  if (i < t->array_size) {
+      ~ ^ ~~~~~~~~~~~~~
+ruby-upb.c:6542:41: warning: comparison of integers of different signs: 'uint32_t' (aka 'unsigned int') and 'int' [-Wsign-compare]
+        (i == 0 || fields[i - 1].number == i)) {
+                   ~~~~~~~~~~~~~~~~~~~~ ^  ~
+ruby-upb.c:6541:43: warning: comparison of integers of different signs: 'uint32_t' (aka 'unsigned int') and 'int' [-Wsign-compare]
+    if (i < UINT8_MAX && fields[i].number == i + 1 &&
+                         ~~~~~~~~~~~~~~~~ ^  ~~~~~
+ruby-upb.c:7441:30: warning: comparison of integers of different signs: 'const uint32_t' (aka 'const unsigned int') and 'int32_t' (aka 'int') [-Wsign-compare]
+        if (fields[i].number == field_number) {
+            ~~~~~~~~~~~~~~~~ ^  ~~~~~~~~~~~~
+ruby-upb.c:7913:46: warning: comparison of integers of different signs: 'uint32_t' (aka 'unsigned int') and 'const int32_t' (aka 'const int') [-Wsign-compare]
+    if (r->start <= f->number_ && f->number_ < r->end) {
+                                  ~~~~~~~~~~ ^ ~~~~~~
+ruby-upb.c:7913:18: warning: comparison of integers of different signs: 'const int32_t' (aka 'const int') and 'uint32_t' (aka 'unsigned int') [-Wsign-compare]
+    if (r->start <= f->number_ && f->number_ < r->end) {
+        ~~~~~~~~ ^  ~~~~~~~~~~
+ruby-upb.c:8039:21: warning: comparison of integers of different signs: 'int' and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+  for (int i = 0; i < n; i++) {
+                  ~ ^ ~
+10 warnings generated.
+compiling wrap_memcpy.c
+compiling ./third_party/utf8_range/naive.c
+compiling ./third_party/utf8_range/range2-neon.c
+compiling ./third_party/utf8_range/range2-sse.c
+linking shared-object google/protobuf_c.bundle
+
+current directory: /Users/ishigurotasuku/workspace/Portfolio/test2/app_test/vendor/bundle/ruby/2.7.0/gems/google-protobuf-3.20.1/ext/google/protobuf_c
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 protobuf_c.bundle ./.gem.20220509-39849-18odbjk/google

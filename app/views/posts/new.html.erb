@@ -1,0 +1,7 @@
+<h1>反省文投稿</h1>
+
+<%= form_with model: @post, url: posts_path do |form| %>
+  <%= form.text_area :content, id: "title" %>
+
+  <%= form.submit "提出する" %>
+<% end %>
