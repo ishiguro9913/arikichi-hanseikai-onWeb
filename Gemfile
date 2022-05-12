@@ -62,8 +62,10 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'sorcery'
-  
+
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 
-gem 'google-cloud-language', '~> 0.32.1'
+gem 'dotenv-rails'
+
+gem 'pry-rails'
