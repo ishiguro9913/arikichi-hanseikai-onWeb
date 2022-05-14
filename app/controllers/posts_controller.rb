@@ -9,12 +9,10 @@ class PostsController < ApplicationController
 
     # post = @post
     
-    magnitude = @post.get_sentiment
+    @post.get_sentiment
     
     # content.get_sentiment
     
-
-    @post.score = magnitude
     @post.ablution = 'テスト用の禊文章です'
     @post.name = current_user.name
     @post.save!

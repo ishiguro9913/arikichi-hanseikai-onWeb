@@ -11,7 +11,7 @@ class Post < ApplicationRecord
 
   # ENV["GOOGlE_API_KYE"]に取得したAPIキーを入れます。
   
-    uri = URI.parse("https://language.googleapis.com/v1beta1/documents:analyzeSentiment?key=#{ENV["GOOGlE_API_KYE"]}")
+    uri = URI.parse("https://language.googleapis.com/v1beta1/documents:analyzeSentiment?key=#{ENV["GOOGlE_API_KEY"]}")
     # binding.pry
     request = Net::HTTP::Post.new(uri)
     request.content_type = "application/json"
@@ -37,9 +37,9 @@ class Post < ApplicationRecord
     # score =  json['documentSentiment']['score']*100
     
   # magnitudeに文章の感情の強さみたいなものが入ります。
-    magnitude = json['documentSentiment']['magnitude']*100
+    self.score = json['documentSentiment']['magnitude']*100
     # sentiment = {score: score.to_i, magnitude: magnitude.to_i}
 
-    return magnitude
+    # return magnitude
   end
 end
