@@ -1,0 +1,15 @@
+<div class='w-75 mx-5'>
+
+  <h1>反省一覧</h1>
+
+  <div class='d-flex flex-column bd-highlight'>
+    <% if @posts.present? %>
+      <%= render @posts %>
+    <% else %>
+      <p><%= '.no_result' %></p>
+    <% end %>
+    </div>
+  
+<%= paginate @posts, theme: 'twitter-bootstrap-4'%>
+
+</div>

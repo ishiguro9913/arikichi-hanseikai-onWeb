@@ -4,22 +4,28 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def index
+    @posts = Post.all.includes(:user).order(created_at: :desc).page(params[:page]).per(10)
+  end
+
   def create
     @post = current_user.posts.build(post_params)
 
-    # post = @post
-    
+    # 反省文を採点する
     @post.get_sentiment
-    
-    # content.get_sentiment
-    
+
+    # テスト用に禊文章をいれておく
     @post.ablution = 'テスト用の禊文章です'
+
+    # 投稿者の名前を入れる
     @post.name = current_user.name
-    @post.save!
 
-
-    
-    redirect_to result_path(@post.id), success: '投稿が成功しました。'
+    if @post.save
+      redirect_to result_path(@post.id), success: '投稿が成功しました。'
+    else
+      flash.now[:alert] = 'メッセージを入力してください。'
+      render :new
+    end
   end
 
   private

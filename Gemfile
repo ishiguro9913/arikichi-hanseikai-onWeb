@@ -69,3 +69,6 @@ gem 'jquery-rails'
 gem 'dotenv-rails'
 
 gem 'pry-rails'
+
+gem 'kaminari', '~> 0.17.0'
+gem 'bootstrap4-kaminari-views'
