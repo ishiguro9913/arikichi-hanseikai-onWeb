@@ -8,7 +8,7 @@
   
   <div class="row w-70 ">
     <div class="col">
-      <%= button_to 'Twiterログインして反省してみる', '/guest_login', method: :post, type: 'button', class: 'btn btn-outline-primary btn-lg'%>
+      <%= button_to 'Twiterログインして反省してみる', auth_at_provider_path(provider: :twitter), method: :get, type: 'button', class: 'btn btn-outline-primary btn-lg'%>
     </div>
     <div class="col">
       <%= button_to 'ゲストとして反省してみる', '/guest_login', method: :post, type: 'button', class: 'btn btn-outline-secondary btn-lg'%>
