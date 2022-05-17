@@ -11,13 +11,21 @@ Rails.application.config.sorcery.configure do |config|
 
   config.external_providers = [:twitter, :facebook]
 
-  config.twitter.key = Rails.application.credentials.dig(:twitter, :key)
-  config.twitter.secret = Rails.application.credentials.dig(:twitter, :secret_key)
-  config.twitter.callback_url = 'http://localhost:3000/oauth/callback?provider=twitter'
-  config.twitter.user_info_mapping = {
-    name: 'name',
-    description: 'description'
-  } # Userモデルの属性名: 'twitterのパラメータ'
+  config.twitter.key = "fFXViXEW1qbbZ1cWn1CyHIoYN"
+  config.twitter.secret = "Zfz7XuPgmym7ztCIXmAY3EFx2ptOkwtNFaVUoBu8dgs8O4sFX7"
+  config.twitter.callback_url = "http://127.0.0.1:3000/oauth/callback?provider=twitter"
+  config.twitter.user_info_path = "/1.1/account/verify_credentials.json?include_email=true"
+  config.twitter.user_info_mapping = { name: 'name'  , email: "email" }
+  # binding.pry
+
+
+  # config.twitter.key = Rails.application.credentials.dig(:twitter, :key)
+  # config.twitter.secret = Rails.application.credentials.dig(:twitter, :secret_key)
+  # config.twitter.callback_url = 'http://localhost:3000/oauth/callback?provider=twitter'
+  # config.twitter.user_info_mapping = {
+  #   name: 'name',
+  #   description: 'description'
+  # } # Userモデルの属性名: 'twitterのパラメータ'
 
   # -- core --
   # What controller action to call for non-authenticated users. You can also
@@ -293,6 +301,7 @@ Rails.application.config.sorcery.configure do |config|
     # How many times to apply encryption to the password.
     # Default: 1 in test env, `nil` otherwise
     #
+    user.authentications_class = Authentication
     user.stretches = 1 if Rails.env.test?
 
     # Encryption key used to encrypt reversible encryptions such as AES256.

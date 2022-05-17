@@ -3,6 +3,6 @@ class User < ApplicationRecord
 
   has_many :posts
 
-  has_many :authentications, dependent: :destroy
-  accepts_nested_attributes_for :authentications # has_many :authenticationsより下に書く
+  has_many :authentications, :dependent => :destroy
+  accepts_nested_attributes_for :authentications
 end

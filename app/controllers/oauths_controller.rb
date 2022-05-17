@@ -1,30 +1,29 @@
 class OauthsController < ApplicationController
   # skip_before_action :require_login # applications_controllerでbefore_action :require_loginを設定している場合
 
+  skip_before_action :require_login, raise: false
+      
+  # sends the user on a trip to the provider,
+  # and after authorizing there back to the callback url.
   def oauth
-    # login_at(auth_params[:provider])
     login_at(params[:provider])
   end
-
+      
   def callback
-    provider = auth_params[:provider]
-    if (@user = login_from(provider))
-      redirect_to root_path, notice: "#{provider.titleize}でログインしました"
+    provider = params[:provider]
+    if @user = login_from(provider)
+      redirect_to root_path, :notice => "Logged in from #{provider.titleize}!"
     else
       begin
         @user = create_from(provider)
-        reset_session
+        # NOTE: this is the place to add '@user.activate!' if you are using user_activation submodule
+        reset_session # protect from session fixation attack
         auto_login(@user)
-        redirect_to root_path, notice: "#{provider.titleize}でログインしました"
-      rescue StandardError
-        redirect_to root_path, alert: "#{provider.titleize}でのログインに失敗しました"
+        redirect_to root_path, :notice => "Logged in from #{provider.titleize}!"
+      rescue
+        binding.pry
+        redirect_to root_path, :alert => "Failed to login from #{provider.titleize}!"
       end
     end
   end
-
-  private
-
-  def auth_params
-    params.permit(:code, :provider)
-  end
-end
+end 
