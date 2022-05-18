@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_15_105758) do
+ActiveRecord::Schema.define(version: 2022_05_18_131816) do
 
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2022_05_15_105758) do
     t.string "uid", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "access_token"
+    t.string "access_token_secret"
     t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
   end
 

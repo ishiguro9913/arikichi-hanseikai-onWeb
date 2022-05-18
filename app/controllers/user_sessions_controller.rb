@@ -9,6 +9,15 @@ class UserSessionsController < ApplicationController
     redirect_to new_post_path, success: 'ゲストとしてログインしました'
   end
 
+  def twitter_login
+    @guest_user = User.create(
+    twitter_id: SecureRandom.alphanumeric(10),
+    name: '匿名様',
+    )
+    auto_login(@guest_user)
+    redirect_to new_post_path, success: 'ゲストとしてログインしました'
+  end
+
   def create
     unless request.env['omniauth.auth'][:uid]
       flash[:danger] = '連携に失敗しました'
