@@ -51,6 +51,5 @@ class Post < ApplicationRecord
                  '１ヶ月禁酒しましょう']
     num = rand(3)
     self.ablution = ablutions[num]
-    binding.pry
   end
 end

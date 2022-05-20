@@ -17,15 +17,8 @@
     
       <nav class="my-2 my-md-0 mr-md-3">
         <%= link_to "反省一覧", posts_path, class: "p-2 text-dark" %> |
-        <%= link_to "反省してみる", new_post_path, class: "p-2 text-dark" %> |
-        <%# if @user.name = "匿名様" %>
-         <%= link_to "反省して", new_post_path, class: "p-2 text-dark" %>
-        <%#else %>
-         <%# binding.pry %>
-         <%= link_to "ログアウト", new_post_path, class: "p-2 text-dark" %>
-        <%# end %>
+        <%= link_to "ゲストとして反省してみる", new_post_path, class: "p-2 text-dark" %> 
       </nav>
-      <a class="btn btn-outline-primary" href="#">Sign up</a>
     </div>
     <%= render 'shared/flash' %>
     <%= yield %>
