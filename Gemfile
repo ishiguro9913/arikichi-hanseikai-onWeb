@@ -80,3 +80,5 @@ gem 'kaminari', '~> 0.17.0'
 gem 'bootstrap4-kaminari-views'
 
 gem 'omniauth-twitter'
+
+gem 'config'
