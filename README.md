@@ -1,24 +1,41 @@
-# README
+# 有吉反省会 on Web(仮)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サービス概要
+１人で抱えている反省をアウトプットして、前を向くことを助けるアプリ<br>
 
-Things you may want to cover:
+## メインのターゲットユーザー
+１人反省会を開いて悩みを抱えてしまう人
+　
+## ユーザーが抱える課題
+・細かいことを気にしてしまい１人で反省を抱え続けてしまう<br>
+・友達と会った帰りや飲み会の帰り道に、「何であんなこと言ってしまったんだろうか」「あの発言で実は嫌われていたりしないだろうか」と悩んでしまう<br>
 
-* Ruby version
+## 解決方法
+・反省文の採点<br>
+⇨投稿された反省文が気持ちのこもった文章になっているか採点<br>
+・禊の提案<br>
+⇨反省文・Twitterアカウントを解析して、反省に合った禊を生成する
 
-* System dependencies
+## 実装予定の機能
+・Twitterログイン機能<br>
+・反省文を作成して投稿出来る機能<br>
+・反省文を採点する機能<br>
+ ※[Natural Language AI](https://cloud.google.com/natural-language?hl=ja) 等の文章解析APIを利用して、文章から感情を読み取れるか判定する。<br>
+・投稿された反省文、Twitterアカウントを解析して禊を自動生成する<br>
+・投稿された反省文・採点された点数・生成された禊が一覧で閲覧出来る<br>
+・投稿された反省文に「反省している」ボタン「反省してない」ボタンのリアクションをすることが出来る<br>
+・結果をツイート出来るOGPを作成機能
 
-* Configuration
+## なぜこのサービスを作りたいのか
+・自分自身が色々細かいことで、悩んで抱え続けてしまう性格<br>
+・ひとりで悩んでも仕方ないので、反省の吐口があるといいと考えたため<br>
+・「１人反省会」と検索したところ、6700万件ほどヒットする。このため、自分と似たようなことで悩んでしまう人は多いのではないかと考えている。
 
-* Database creation
+## スケジュール
+MVP完成　〜5/8
 
-* Database initialization
+## 画面遷移図
+https://www.figma.com/file/QLL5sBS5FH9SbOdqkbfuxZ/%E6%9C%89%E5%90%89%E5%8F%8D%E7%9C%81%E4%BC%9A-onWeb%E3%80%80%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0%3A1
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## ER図
+https://drive.google.com/file/d/1BxZe2iHO0GjB0GOA99aYnZptS8PkokP1/view?usp=sharing
