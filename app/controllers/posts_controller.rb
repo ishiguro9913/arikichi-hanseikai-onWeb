@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
 
   def new
+    #auto_login(current_user)
+    # binding.pry
+    @user = current_user
+    # binding.pry
     @post = Post.new
   end
 
@@ -16,6 +20,7 @@ class PostsController < ApplicationController
 
     # テスト用に禊文章をいれておく
     @post.ablution = 'テスト用の禊文章です'
+    @post.get_ablution
 
     # 投稿者の名前を入れる
     @post.name = current_user.name

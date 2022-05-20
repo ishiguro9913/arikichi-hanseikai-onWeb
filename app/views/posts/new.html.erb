@@ -1,6 +1,10 @@
 <div class='w-75 p-3 mx-5 d-flex flex-column bd-highlight'>
 
   <h1>反省文投稿</h1>
+  　<%# binding.pry %>
+    <% if @user.name != "匿名様" %>
+      <span class='h4'>私、<%= @user.name %>は</span><br>
+    <% end %>
 
     <%= form_with model: @post, url: posts_path do |form| %>
       <%= form.text_area :content, class: 'form-controll p-2 bd-highlight w-50', id: 'exampleFormControlTextarea1', rows: '5' %>

@@ -43,4 +43,14 @@ class Post < ApplicationRecord
 
     # return magnitude
   end
+
+  def get_ablution
+    ablutions = ['お風呂で冷水をかぶりましょう',
+                 '滝に打たれましょう', 
+                 'ボランティアに参加しましょう',
+                 '１ヶ月禁酒しましょう']
+    num = rand(3)
+    self.ablution = ablutions[num]
+    binding.pry
+  end
 end

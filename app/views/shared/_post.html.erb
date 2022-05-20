@@ -1,0 +1,13 @@
+
+  <% @posts.each do |post| %>
+    <div id='post-id-<%= post.id%>', class='d-flex flex-column bd-highlight p-4'>
+    <span class='h5'>反省文</span><span class='h3'><%= post.content %></span>
+    <span class='h5'>反省点</span><span class='h2'><%= post.score %>点</span>
+    <span class='h5'>禊</span><span class='h3'><%= post.ablution %></span>
+    <span>反省人：<%= post.name %></span>
+    <span>反省日：<%= post.created_at.strftime('%Y/%m/%d') %></span>
+    </div>
+  <% end %>
+
+  
+    
