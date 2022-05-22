@@ -19,7 +19,7 @@ module UserSessionsHelper
 
   # Twitterログインしていればtrue、ゲストログインならfalseを返す
   def twitter_logged_in?
-    !@current_user.name != '匿名様'
+    @user.name != '匿名様' 
   end
 
   # 現在のユーザーをログアウトする
