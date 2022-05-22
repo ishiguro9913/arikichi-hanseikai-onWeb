@@ -1,2 +1,2 @@
 api:
-  callback: "https://arikichi-hanseikai-onweb.herokuapp.com//oauth/callback?provider=twitter"
+  callback: "https://arikichi-hanseikai-onweb.herokuapp.com/oauth/callback?provider=twitter"
