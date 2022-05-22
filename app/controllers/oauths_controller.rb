@@ -18,8 +18,6 @@ class OauthsController < ApplicationController
     end
     # 送られてきた認証情報でログインできなかったとき（該当するユーザーがいない場合）、新規ユーザーを作成する
      create_user_from(provider) unless (@user = login_from(provider))
-
-    
     redirect_to new_post_path, success: "#{provider.titleize}でログインしました"
   end
 
