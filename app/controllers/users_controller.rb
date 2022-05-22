@@ -6,8 +6,9 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  # GET /users/1 or /users/1.json
+  # GET /users/1
   def show
+    @user = @current_user
   end
 
   # GET /users/new
