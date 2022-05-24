@@ -1,14 +1,12 @@
 class PostsController < ApplicationController
 
   def new
-    #auto_login(current_user)
-    # binding.pry
     @user = current_user
-    # binding.pry
     @post = Post.new
   end
 
   def index
+    @user = current_user
     @posts = Post.all.includes(:user).order(created_at: :desc).page(params[:page]).per(10)
   end
 
