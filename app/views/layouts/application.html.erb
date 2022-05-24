@@ -22,8 +22,8 @@
             <%= link_to "反省一覧", posts_path, class: "p-2 text-dark" %> |
             <%= link_to "ログアウト", class: "p-2 text-dark" %>
           <% else %>
-            <%= link_to "マイページ", class: "p-2 text-dark" %> |
-            <%= link_to "反省一覧", posts_path, class: "p-2 text-dark" %> 
+            <%= link_to "反省一覧", posts_path, class: "p-2 text-dark" %> |
+            <%= link_to "Twitter連携して反省してみる", new_post_path, class: "p-2 text-dark" %> 
           <% end %>
         <% else %>
           <%= link_to "反省一覧", posts_path, class: "p-2 text-dark" %> |
