@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   validates :content, presence: true  
   belongs_to :user
 
+  enum status: { private: 0, public: 1 }, _prefix: true
+
   def get_sentiment
     require 'net/http'
     require 'uri'
