@@ -14,12 +14,14 @@ module UserSessionsHelper
 
   # ユーザーがログインしていればtrue、その他ならfalseを返す
   def logged_in?
-    !@current_user.nil?
+    # !@current_user.nil?
+    !@user.nil?
   end
 
   # Twitterログインしていればtrue、ゲストログインならfalseを返す
   def twitter_logged_in?
-    !@current_user.twitter_id.nil?
+    # !@current_user.twitter_id.nil?
+    !@user.twitter_id.nil?
   end
 
   # 現在のユーザーをログアウトする

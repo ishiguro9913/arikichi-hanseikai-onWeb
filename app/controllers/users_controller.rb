@@ -8,11 +8,11 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    @user = @current_user
+    @times = Time.where(user_id: current_user.id).includes(:user).order("created_at DESC")
   end
 
   # GET /users/new
-  def new
+  def new 
     @user = User.new
   end
 
