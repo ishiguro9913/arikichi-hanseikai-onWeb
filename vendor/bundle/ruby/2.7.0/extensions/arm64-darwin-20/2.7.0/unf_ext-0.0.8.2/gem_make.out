@@ -1,0 +1,16 @@
+current directory: /Users/ishigurotasuku/workspace/Portfolio/test2/arikichi-hanseikai-onWeb/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+/Users/ishigurotasuku/.rbenv/versions/2.7.4/bin/ruby -I /Users/ishigurotasuku/.rbenv/versions/2.7.4/lib/ruby/site_ruby/2.7.0 -r ./siteconf20220529-53119-1rtbml3.rb extconf.rb
+checking for -lstdc++... yes
+creating Makefile
+
+current directory: /Users/ishigurotasuku/workspace/Portfolio/test2/arikichi-hanseikai-onWeb/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\= clean
+
+current directory: /Users/ishigurotasuku/workspace/Portfolio/test2/arikichi-hanseikai-onWeb/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\=
+compiling unf.cc
+linking shared-object unf_ext.bundle
+
+current directory: /Users/ishigurotasuku/workspace/Portfolio/test2/arikichi-hanseikai-onWeb/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 unf_ext.bundle ./.gem.20220529-53119-1gkk08e

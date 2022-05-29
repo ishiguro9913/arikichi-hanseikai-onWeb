@@ -18,6 +18,7 @@ class OauthsController < ApplicationController
     end
     # 送られてきた認証情報でログインできなかったとき（該当するユーザーがいない場合）、新規ユーザーを作成する
      create_user_from(provider) unless (@user = login_from(provider))
+    # binding.pry 
     redirect_to new_post_path, success: "#{provider.titleize}でログインしました"
   end
 
@@ -34,7 +35,7 @@ class OauthsController < ApplicationController
                                  provider: provider,
                                  access_token: access_token.token,
                                  access_token_secret: access_token.secret) # ②
-      # binding.pry
+      binding.pry
       @user.save! # ③
       redirect_to '/twitter_login'
       reset_session
