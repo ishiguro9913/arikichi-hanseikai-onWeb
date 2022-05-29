@@ -3,12 +3,7 @@
   <h1>マイページ</h1>
   　<%# binding.pry %>
     <span class='h4'>お名前：<%= @user.name %>様</span>
-    <div class='d-flex flex-column bd-highlight'>
-      <% if @posts.present? %>
-        <%= render @posts %>
-      <% else %>
-        <p><%= '.no_result' %></p>
-      <% end %>
+    <%= link_to '自分の反省文へ', root_path, class: 'h4' %>
       </div>
 
 

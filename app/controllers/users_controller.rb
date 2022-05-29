@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    @times = Time.where(user_id: current_user.id).includes(:user).order("created_at DESC")
+    # @times = Time.where(user_id: current_user.id).includes(:user).order("created_at DESC")
   end
 
   # GET /users/new

@@ -1,5 +1,6 @@
 class ResultsController < ApplicationController
   before_action :require_login
+  after_action :save_post
 
   def new
     @post = Post.find_by(id: params[:format])
@@ -9,4 +10,7 @@ class ResultsController < ApplicationController
     redirect_to login_url, alert: 'ログインしてください'
   end
 
+  def save_post
+    @post.save!
+  end
 end
