@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   has_many :authentications, :dependent => :destroy
   #has_one :authentications, :dependent => :destroy

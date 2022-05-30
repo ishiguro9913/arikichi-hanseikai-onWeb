@@ -1,0 +1,5 @@
+current directory: /Users/ishigurotasuku/workspace/Portfolio/test2/arikichi-hanseikai-onWeb/vendor/bundle/ruby/2.7.0/gems/http-parser-1.2.3/ext
+/Users/ishigurotasuku/.rbenv/versions/2.7.4/bin/ruby -I/Users/ishigurotasuku/.rbenv/versions/2.7.4/lib/ruby/site_ruby/2.7.0 -rrubygems /Users/ishigurotasuku/workspace/Portfolio/test2/arikichi-hanseikai-onWeb/vendor/bundle/ruby/2.7.0/gems/rake-13.0.6/exe/rake RUBYARCHDIR\=/Users/ishigurotasuku/workspace/Portfolio/test2/arikichi-hanseikai-onWeb/vendor/bundle/ruby/2.7.0/extensions/arm64-darwin-20/2.7.0/http-parser-1.2.3 RUBYLIBDIR\=/Users/ishigurotasuku/workspace/Portfolio/test2/arikichi-hanseikai-onWeb/vendor/bundle/ruby/2.7.0/extensions/arm64-darwin-20/2.7.0/http-parser-1.2.3
+mkdir -p aarch64-darwin/http-parser
+clang -fexceptions -O -fno-omit-frame-pointer -fno-strict-aliasing -Wall -Wextra -O3   -o aarch64-darwin/http-parser/http_parser.o -c ./http-parser/http_parser.c
+clang -bundle -o aarch64-darwin/libhttp-parser-ext.bundle aarch64-darwin/http-parser/http_parser.o -fexceptions 
