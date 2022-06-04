@@ -23,7 +23,7 @@ class PostsController < ApplicationController
       # ゲストログインは禊を生成しない予定だが、一旦入れておく
       @post.ablution = 'こちらはゲストログインしています'
     else
-      twitter_client.user_timeline(user_id: 'agrgargarga', count: 1, exclude_replies: false, include_rts: false, contributor_details: false, result_type: "recent", locale: "ja", tweet_mode: "extended").each do |tweet|
+      twitter_client.user_timeline(user_id: current_user.twitter_id, count: 1, exclude_replies: false, include_rts: false, contributor_details: false, result_type: "recent", locale: "ja", tweet_mode: "extended").each do |tweet|
         puts tweet.full_text
       # twitter_client.user_timeline(user_id: current_user.twitter_id, count: 1).each do |tweet|
         # puts "#{tweet.user.name}[ID:#{tweet.user.screen_name}]"
