@@ -15,27 +15,34 @@ class PostsController < ApplicationController
 
     # 反省文を採点する
     @post.get_sentiment
-
-    # テスト用に禊文章をいれておく
-    @post.ablution = 'テスト用の禊文章です'
-    # @post.get_ablution
-
+    
     # 投稿者の名前を入れる
     @post.name = current_user.name
 
-    twitter_client
-    # binding.pry
-    # puts twitter_client.user_timeline(current_user.twitter_id, count: 200, tweet_mode: 'extended')
-    # tweet = twitter_client.user_timeline(user_id: current_user.twitter_id, count: 1, exclude_replies: false, include_rts: false, contributor_details: false, result_type: "recent", locale: "ja", tweet_mode: "extended")
-    twitter_client.user_timeline({ count: 200 }).each do |tweet|
-      puts "#{tweet.user.name}[ID:#{tweet.user.screen_name}]"
-      puts tweet.full_text
+    if current_user.twitter_id.nil?
+      # ゲストログインは禊を生成しない予定だが、一旦入れておく
+      @post.ablution = 'こちらはゲストログインしています'
+    else
+      twitter_client.user_timeline(user_id: current_user.twitter_id, count: 1, exclude_replies: false, include_rts: false, contributor_details: false, result_type: "recent", locale: "ja", tweet_mode: "extended").each do |tweet|
+        puts tweet.full_text
+      # twitter_client.user_timeline(user_id: current_user.twitter_id, count: 1).each do |tweet|
+        # puts "#{tweet.user.name}[ID:#{tweet.user.screen_name}]"
+        # puts tweet.full_text
+        # binding.pry
+
+        # テスト用に禊文章をいれておく
+        # @post.get_ablution
+        @post.ablution = tweet.full_text
+      end
     end
-    
+
+
+
+
     if @post.save
       redirect_to result_path(@post.id), success: '投稿が成功しました。'
     else
-      flash.now[:alert] = 'メッセージを入力してください。'
+      flash.now[:alert] = '投稿が失敗しました。'
       render :new
     end
   end
