@@ -19,21 +19,33 @@ class PostsController < ApplicationController
     # 投稿者の名前を入れる
     @post.name = current_user.name
 
+
+
     if current_user.twitter_id.nil?
       # ゲストログインは禊を生成しない予定だが、一旦入れておく
       @post.ablution = 'こちらはゲストログインしています'
     else
-      twitter_client.user_timeline(user_id: current_user.twitter_id, count: 1, exclude_replies: false, include_rts: false, contributor_details: false, result_type: "recent", locale: "ja", tweet_mode: "extended").each do |tweet|
-        puts tweet.full_text
-      # twitter_client.user_timeline(user_id: current_user.twitter_id, count: 1).each do |tweet|
-        # puts "#{tweet.user.name}[ID:#{tweet.user.screen_name}]"
-        # puts tweet.full_text
-        # binding.pry
+      # binding.pry
+      # @post.ablution = twitter_client.follow(current_user.twitter_id)
+      # twitter_client.user_timeline(user_id: current_user.twitter_id, count: 1, exclude_replies: false, include_rts: false, contributor_details: false, result_type: "recent", locale: "ja", tweet_mode: "extended").each do |tweet|
+        #puts tweet.full_text
+      twitter_client.user_timeline(user_id: current_user.twitter_id, count: 1).each do |tweet|
+        puts "#{tweet.user.name}[ID:#{tweet.user.screen_name}]"
+        @iine = 0
+        @iine += tweet.favorite_count
+      end
 
         # テスト用に禊文章をいれておく
         # @post.get_ablution
-        @post.ablution = tweet.full_text
-      end
+        # @post.ablution = tweet.full_text
+
+        # その人がしているいいね数　最大1000件
+        # favorites = twitter_client.favorites(count: 1).count.to_s
+        # その人がフォローしている人の数
+        # followers = twitter_client.followers(count: 1).count.to_s
+
+        # @post.ablution = "いいね数：#{favorites}　フォロー数：#{followers}　もらったいいね数：#{@iine}"
+        @post.ablution = "もらったいいね数：#{@iine}"
     end
 
 
