@@ -9,17 +9,22 @@ class OauthsController < ApplicationController
     # login_at(params[:provider])
     login_at(auth_params[:provider])
   end
-      
+
   def callback
     provider = auth_params[:provider]
     if auth_params[:denied].present?
-      # redirect_to root_path, notice: "ログインをキャンセルしました"
+      redirect_to root_path, notice: "ログインをキャンセルしました"
       return
     end
     # 送られてきた認証情報でログインできなかったとき（該当するユーザーがいない場合）、新規ユーザーを作成する
-     create_user_from(provider) unless (@user = login_from(provider))
-    # binding.pry 
-    redirect_to new_post_path, success: "#{provider.titleize}でログインしました"
+    # create_user_from(provider) unless (@user = login_from(provider))
+    # redirect_to new_post_path, success: "#{provider.titleize}でログインしました" 
+    if (@user = login_from(provider)) 
+      redirect_to new_post_path, success: "#{provider.titleize}でログインしました"
+    else
+      create_user_from(provider)
+      redirect_to new_post_path, success: "#{provider.titleize}で新規登録しました"
+    end
   end
 
     private
@@ -28,16 +33,19 @@ class OauthsController < ApplicationController
       params.permit(:code, :provider, :denied)
     end
 
+    # def create_user_from(provider)
+    #   @user = build_from(provider) # ①
+    #   @user.authentications.build(uid: @user_hash[:uid],
+    #                              provider: provider,
+    #                              access_token: access_token.token,
+    #                              access_token_secret: access_token.secret) # ②
+    #   @user.save! # ③ 
+    #   reset_session
+    #   auto_login(@user)
+    # end
+
     def create_user_from(provider)
-      # binding.pry
-      @user = build_from(provider) # ①
-      @user.authentications.build(uid: @user_hash[:uid],
-                                 provider: provider,
-                                 access_token: access_token.token,
-                                 access_token_secret: access_token.secret) # ②
-      binding.pry
-      @user.save! # ③
-      redirect_to '/twitter_login'
+      @user = create_from(provider)
       reset_session
       auto_login(@user)
     end
