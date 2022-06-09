@@ -29,11 +29,35 @@ class PostsController < ApplicationController
       # @post.ablution = twitter_client.follow(current_user.twitter_id)
       # twitter_client.user_timeline(user_id: current_user.twitter_id, count: 1, exclude_replies: false, include_rts: false, contributor_details: false, result_type: "recent", locale: "ja", tweet_mode: "extended").each do |tweet|
         #puts tweet.full_text
+
+      # 直近のツイートでもらっているいいね数の合計を取得
       twitter_client.user_timeline(user_id: current_user.twitter_id, count: 1).each do |tweet|
-        puts "#{tweet.user.name}[ID:#{tweet.user.screen_name}]"
         @iine = 0
         @iine += tweet.favorite_count
       end
+
+      # 直近のツイートのネガティブ度を測定
+
+      @tweet_aggregation = ''
+      twitter_client.user_timeline(user_id: current_user.twitter_id, count: 5).each do |tweet|
+        # tweet_aggregation <<  tweet.full_text.gsub(/(\r\n?|\n)/,"")
+        @tweet_aggregation <<  tweet.full_text.encode('SJIS', 'UTF-8', invalid: :replace, undef: :replace, replace: '').encode('UTF-8').gsub(/[0-9A-Za-z]/, '')
+      end
+      # binding.pry
+      tweet = Post.new(ablution: @tweet_aggregation)
+      tweet.tweet_diagnose
+      nagative = tweet.score
+      # binding.pry
+      # @tweet_aggregation.tweet_diagnose
+      # @post.ablution = @tweet_aggregation.tweet_diagnose
+      @post.ablution = "ツイートのネガティブ度：#{nagative}"
+
+
+
+
+
+
+
 
         # テスト用に禊文章をいれておく
         # @post.get_ablution
@@ -45,7 +69,8 @@ class PostsController < ApplicationController
         # followers = twitter_client.followers(count: 1).count.to_s
 
         # @post.ablution = "いいね数：#{favorites}　フォロー数：#{followers}　もらったいいね数：#{@iine}"
-        @post.ablution = "もらったいいね数：#{@iine}"
+        # @post.ablution = "もらったいいね数：#{@iine}"
+        # @post.ablution = 
     end
 
 
