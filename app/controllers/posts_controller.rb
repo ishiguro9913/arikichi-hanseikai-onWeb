@@ -30,20 +30,18 @@ class PostsController < ApplicationController
       # twitter_client.user_timeline(user_id: current_user.twitter_id, count: 1, exclude_replies: false, include_rts: false, contributor_details: false, result_type: "recent", locale: "ja", tweet_mode: "extended").each do |tweet|
         #puts tweet.full_text
 
-      # 直近のツイートでもらっているいいね数の合計を取得
+      # 直近のツイートでもらっているいいね数の合計を取得------------------------------------------------ 
       twitter_client.user_timeline(user_id: current_user.twitter_id, count: 1).each do |tweet|
         @iine = 0
         @iine += tweet.favorite_count
       end
+      # -----------------------------------------------------------------------------------------
 
       # 直近のツイートのネガティブ度を測定 ------------------------------------------------
-
       @tweet_aggregation = ''
       twitter_client.user_timeline(user_id: current_user.twitter_id, count: 5).each do |tweet|
-        # tweet_aggregation <<  tweet.full_text.gsub(/(\r\n?|\n)/,"")
         @tweet_aggregation <<  tweet.full_text.encode('SJIS', 'UTF-8', invalid: :replace, undef: :replace, replace: '').encode('UTF-8').gsub(/[0-9A-Za-z]/, '')
       end
-      # binding.pry
       tweet = Post.new(ablution: @tweet_aggregation)
       tweet.tweet_diagnose
       nagative = tweet.score
@@ -77,18 +75,26 @@ class PostsController < ApplicationController
 
 
 
-        # テスト用に禊文章をいれておく
-        # @post.get_ablution
-        # @post.ablution = tweet.full_text
+      # その人がしているいいね数を取得　最大1000件? ------------------------------------------------
+      # favorites = twitter_client.favorites(count: 1).count.to_s
+      # @post.ablution = "過去にしてきたいいね数 #{favorites}"
+      # ------------------------------------------------------------------------------------
 
-        # その人がしているいいね数　最大1000件
-        # favorites = twitter_client.favorites(count: 1).count.to_s
-        # a@post.ablution = "過去にしてきたいいね数 #{favorites}"
+      # その人がフォローしている人の数 -----------------------------------------------------------
+      # followers = twitter_client.followers(count: 1).count.to_s
+      # ------------------------------------------------------------------------------------
 
-        # Twitter.favorites(query={})
-        # その人がフォローしている人の数
-        # followers = twitter_client.followers(count: 1).count.to_s
 
+      # 今までの総ツイート数 -----------------------------------------------------------
+      # ツイッターをやっている年数とかも考慮した方がいいか悩み中
+      tweet_total = twitter_client.user(current_user.twitter_id.to_i).tweets_count
+      since = twitter_client.user(current_user.twitter_id.to_i).created_at
+      now = Time.now
+      period = (now - since).divmod(86400).each_slice(2).map { |day, sec_r| (Time.parse("1/1") + sec_r).strftime("#{day}日") }.first
+      @post.ablution = "ツイートした数：#{tweet_total} ツイッター歴：#{period}" 
+      # -----------------------------------------------------------------------------
+
+      # binding.pry
         # @post.ablution = "いいね数：#{favorites}　フォロー数：#{followers}　もらったいいね数：#{@iine}"
         # @post.ablution = "もらったいいね数：#{@iine}"
         # @post.ablution = 
