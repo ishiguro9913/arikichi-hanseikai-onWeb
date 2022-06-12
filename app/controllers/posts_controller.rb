@@ -36,7 +36,7 @@ class PostsController < ApplicationController
         @iine += tweet.favorite_count
       end
 
-      # 直近のツイートのネガティブ度を測定
+      # 直近のツイートのネガティブ度を測定 ------------------------------------------------
 
       @tweet_aggregation = ''
       twitter_client.user_timeline(user_id: current_user.twitter_id, count: 5).each do |tweet|
@@ -52,10 +52,28 @@ class PostsController < ApplicationController
       # @post.ablution = @tweet_aggregation.tweet_diagnose
       @post.ablution = "ツイートのネガティブ度：#{nagative}"
 
+      # ------------------------------------------------------------------------------ 
 
 
+      # 直近の5ツイートの投稿時間からツイートの頻度を計測--------------------
+      tweet_frequency = Array.new
+      tweet_variance = Array.new
 
+      # 直近のツイートの投稿時間を配列へ
+      twitter_client.user_timeline(user_id: current_user.twitter_id, count: 5).each do |tweet|
+        tweet_frequency <<  tweet.created_at
+      end
 
+      # 各ツイートの投稿の間隔を配列へ
+      for i in 1..tweet_frequency.length-1
+        tweet_variance << tweet_frequency[i] - tweet_frequency[i-1]
+      end
+
+      # 投稿時間の標準偏差を出す
+      variance = stdev(tweet_variance).round
+      @post.ablution = "ツイートの頻度は#{variance}"
+
+      # --------------------------------------------------------------
 
 
 
@@ -65,6 +83,9 @@ class PostsController < ApplicationController
 
         # その人がしているいいね数　最大1000件
         # favorites = twitter_client.favorites(count: 1).count.to_s
+        # a@post.ablution = "過去にしてきたいいね数 #{favorites}"
+
+        # Twitter.favorites(query={})
         # その人がフォローしている人の数
         # followers = twitter_client.followers(count: 1).count.to_s
 
@@ -82,6 +103,36 @@ class PostsController < ApplicationController
       flash.now[:alert] = '投稿が失敗しました。'
       render :new
     end
+  end
+
+  def average(ary)
+    return ary.sum.to_f / ary.length
+  end
+  
+  # 偏差
+  def dev(ary, value)
+    return value - average(ary)
+  end
+  
+  # 偏差平方
+  def devsq(ary, value)
+    return dev(ary, value) ** 2
+  end
+  
+  # 偏差平方和
+  def devsqsum(ary)
+    return ary.collect{|n| devsq(ary, n)}.sum
+  end
+  
+  # 分散
+  def variance(ary)
+    return devsqsum(ary) / ary.length
+  end
+  
+  # 標準偏差
+  def stdev(ary)
+    # Math.sqrtメソッドで平方根を計算できる
+    Math.sqrt(variance(ary))
   end
 
   private

@@ -46,6 +46,27 @@ class Post < ApplicationRecord
     # return magnitude
   end
 
+
+  def sum_i
+    sum = reduce(:+)
+    m = sum.to_f / size
+    var = reduce(0) { |a,b| a + (b - m) ** 2 } / (size - 1)
+    Math.sqrt(var)
+  end
+
+  def mean
+    sum.to_f / size
+  end
+
+  def var
+    m = mean
+    reduce(0) { |a,b| a + (b - m) ** 2 } / (size - 1)
+  end
+
+  def sd
+    Math.sqrt(var)
+  end
+
   def tweet_diagnose
     require 'net/http'
     require 'uri'
@@ -77,8 +98,7 @@ class Post < ApplicationRecord
 
     json = JSON.parse(response.body)
   # scoreに文章のポジティブ度が入ります。
-  self.score = json['documentSentiment']['score']*100
-  binding.pry
+    self.score = json['documentSentiment']['score']*100
     # score =  json['documentSentiment']['score']*100
     
   # magnitudeに文章の感情の強さみたいなものが入ります。
