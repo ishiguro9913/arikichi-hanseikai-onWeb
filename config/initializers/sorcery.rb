@@ -11,10 +11,9 @@ Rails.application.config.sorcery.configure do |config|
 
   config.external_providers = [:twitter, :facebook]
 
-  config.twitter.key = "fFXViXEW1qbbZ1cWn1CyHIoYN"
-  config.twitter.secret = "Zfz7XuPgmym7ztCIXmAY3EFx2ptOkwtNFaVUoBu8dgs8O4sFX7"
+  config.twitter.key = ENV['TWITTER_API_KEY']
+  config.twitter.secret = ENV['TWITTER_API_SECRET']
   config.twitter.callback_url = Settings.api[:callback]
-  config.twitter.user_info_path = "/1.1/account/verify_credentials.json?include_email=true"
   config.twitter.user_info_mapping = { name: 'name', twitter_id: 'id_str'}
 
 
