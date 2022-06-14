@@ -5,14 +5,27 @@
     <h1 class="sample01">ひとり<br>&nbsp;&nbsp;反省会</h1>
     <p>on&nbsp;Web</p>
   </div>
-  
-  <div class="row w-70 ">
-    <div class="col">
-      <%= button_to 'Twiterログインして反省してみる', auth_at_provider_path(provider: :twitter), method: :get, type: 'button', class: 'btn btn-outline-primary btn-lg'%>
+
+
+  <% if twitter_logged_in? %>
+    <div class="row w-70 ">
+      <div class="col">
+        <%= button_to '反省してみる', new_post_path, method: :get, type: 'button', class: 'btn btn-outline-primary btn-lg'%>
+      </div>
     </div>
-    <div class="col">
-      <%= button_to 'ゲストとして反省してみる', '/guest_login', method: :post, type: 'button', class: 'btn btn-outline-secondary btn-lg'%>
+  <% else %>
+    <div class="row w-70 ">
+      <div class="col">
+        <%= button_to 'Twiterログインして反省してみる', auth_at_provider_path(provider: :twitter), method: :get, type: 'button', class: 'btn btn-outline-primary btn-lg'%>
+      </div>
+      <div class="col">
+        <%= button_to 'ゲストとして反省してみる', guest_login_path, method: :post, type: 'button', class: 'btn btn-outline-secondary btn-lg'%>
+      </div>
     </div>
+  <% end %>
+
+  <div class="my-5 sample01_wp">
+    <h5 class="sample01">優秀反省文</h5>
   </div>
 
 </div>

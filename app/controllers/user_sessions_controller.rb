@@ -1,6 +1,7 @@
 class UserSessionsController < ApplicationController
 
   def guest_login
+    # ログイン出来なれば新規作成という処理も書いたほうがいいか
     @guest_user = User.find(1)
     auto_login(@guest_user)
     redirect_to new_post_path, success: 'ゲストとしてログインしました'
@@ -36,7 +37,7 @@ class UserSessionsController < ApplicationController
 
 
   def destroy
-    log_out if logged_in?
+    logout if logged_in?
     flash[:success] = 'ログアウトしました'
     redirect_to root_url
   end

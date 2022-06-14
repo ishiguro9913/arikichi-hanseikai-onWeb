@@ -19,8 +19,6 @@ class PostsController < ApplicationController
     # 投稿者の名前を入れる
     @post.name = current_user.name
 
-
-
     if current_user.twitter_id.nil?
       # ゲストログインは禊を生成しない予定だが、一旦入れておく
       @post.ablution = 'こちらはゲストログインしています'
@@ -93,11 +91,6 @@ class PostsController < ApplicationController
       period = (now - since).divmod(86400).each_slice(2).map { |day, sec_r| (Time.parse("1/1") + sec_r).strftime("#{day}日") }.first
       @post.ablution = "ツイートした数：#{tweet_total} ツイッター歴：#{period}" 
       # -----------------------------------------------------------------------------
-
-      # binding.pry
-        # @post.ablution = "いいね数：#{favorites}　フォロー数：#{followers}　もらったいいね数：#{@iine}"
-        # @post.ablution = "もらったいいね数：#{@iine}"
-        # @post.ablution = 
     end
 
 

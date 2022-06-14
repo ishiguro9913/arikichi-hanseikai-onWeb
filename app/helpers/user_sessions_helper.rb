@@ -21,7 +21,13 @@ module UserSessionsHelper
   # Twitterログインしていればtrue、ゲストログインならfalseを返す
   def twitter_logged_in?
     # !@current_user.twitter_id.nil?
-    !@user.twitter_id.nil?
+    !@user.twitter_id.nil? unless @user.nil?
+  end
+
+  def guest_logged_in?
+    # !@current_user.twitter_id.nil?
+    # binding.pry
+    @user.id == 1 unless @user.nil?
   end
 
   # 現在のユーザーをログアウトする

@@ -20,7 +20,7 @@ class OauthsController < ApplicationController
     # create_user_from(provider) unless (@user = login_from(provider))
     # redirect_to new_post_path, success: "#{provider.titleize}でログインしました" 
     if (@user = login_from(provider)) 
-      redirect_to new_post_path, success: "#{provider.titleize}でログインしました"
+      redirect_to root_path, success: "#{provider.titleize}でログインしました"
     else
       create_user_from(provider)
       redirect_to new_post_path, success: "#{provider.titleize}で新規登録しました"
