@@ -3,14 +3,21 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bootstrap";
 
-div[id^="post"] { 
-  background-color: rgb(196, 196, 196); 
+div[id^="post"] {
+  padding: 30rem; 
   margin: 5px 0;
-  border: 2px solid;
-  border-color: black;
-  border-radius: 3ch;
 }
 
+.post-content {
+  background-image: image-url('flame.png');
+  background-repeat: no-repeat;
+  // background-position:center center;                     /* 画像の表示位置を指定  */
+  background-size: 100% 100%;
+  padding: 2rem 3rem 2rem 3rem;
+}
+// div[id^="post"] span {
+//   padding: 2rem 5rem 0 5rem;
+// }
 // #post-id-78 {
 //  background-color:rgb(196, 196, 196);
 // }  
