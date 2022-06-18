@@ -9,11 +9,15 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     # @times = Time.where(user_id: current_user.id).includes(:user).order("created_at DESC")
+
+    @user = current_user
+    @posts = Post.where(user_id: current_user.id).includes(:user).order(created_at: :desc).page(params[:page]).per(10)
+    # @times = Time.where(user_id: current_user.id).includes(:user).order("created_at DESC")
   end
 
   # GET /users/new
-  def new 
-    @user = User.new
+  def new
+    @user = current_user
   end
 
   # GET /users/1/edit

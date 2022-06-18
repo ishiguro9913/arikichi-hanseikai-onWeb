@@ -12,14 +12,15 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    binding.pry
+    
+    # @post = current_user.posts.build(post_params(@current_user.id))
 
     # 反省文を採点する
     @post.get_sentiment
     
     # 投稿者の名前を入れる
     @post.name = current_user.name
-
-
 
     if current_user.twitter_id.nil?
       # ゲストログインは禊を生成しない予定だが、一旦入れておく
@@ -93,11 +94,6 @@ class PostsController < ApplicationController
       period = (now - since).divmod(86400).each_slice(2).map { |day, sec_r| (Time.parse("1/1") + sec_r).strftime("#{day}日") }.first
       @post.ablution = "ツイートした数：#{tweet_total} ツイッター歴：#{period}" 
       # -----------------------------------------------------------------------------
-
-      # binding.pry
-        # @post.ablution = "いいね数：#{favorites}　フォロー数：#{followers}　もらったいいね数：#{@iine}"
-        # @post.ablution = "もらったいいね数：#{@iine}"
-        # @post.ablution = 
     end
 
 
@@ -153,7 +149,6 @@ class PostsController < ApplicationController
       config.consumer_secret = ENV['TWITTER_API_SECRET']
       config.access_token = ENV['ACCESS_TOKEN']
       config.access_token_secret = ENV['ACCESS_TOKEN_SECRET']
-      # binding.pry
     end
   end
 

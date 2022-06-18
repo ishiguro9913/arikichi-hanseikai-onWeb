@@ -14,7 +14,7 @@ Rails.application.config.sorcery.configure do |config|
   config.twitter.key = ENV['TWITTER_API_KEY']
   config.twitter.secret = ENV['TWITTER_API_SECRET']
   config.twitter.callback_url = Settings.api[:callback]
-  config.twitter.user_info_mapping = { name: 'name', twitter_id: 'id_str'}
+  config.twitter.user_info_mapping = { name: 'name', twitter_id: 'id_str', twitter_user_name: 'screen_name'}
 
 
   # config.twitter.key = Rails.application.credentials.dig(:twitter, :key)
