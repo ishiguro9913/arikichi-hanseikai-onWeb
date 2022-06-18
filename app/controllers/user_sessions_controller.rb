@@ -2,6 +2,7 @@ class UserSessionsController < ApplicationController
 
   def guest_login
     # ログイン出来なれば新規作成という処理も書いたほうがいいか
+    User.create(id: 1) unless User.exists?(id: 1)
     @guest_user = User.find(1)
     auto_login(@guest_user)
     redirect_to new_post_path, success: 'ゲストとしてログインしました'

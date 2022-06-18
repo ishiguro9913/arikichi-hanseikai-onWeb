@@ -2,11 +2,21 @@
 
   <h1>マイページ</h1>
   　<%# binding.pry %>
-    <span class='h4'>お名前：<%= @user.name %>様</span>
-    <span class='h4'>id：<%= @user.twitter_id %>様</span>
+    <span class='h2'><%= @user.name %></span>
+     <span class='h4'>@<%= @user.twitter_user_name %></span>
+  <h1> </h1>
+  <h1>投稿した反省文</h1>
+  　<%# binding.pry %>
 
-    <%= link_to '自分の反省文へ', root_path, class: 'h4' %>
 
-
+  <div class='d-flex flex-column bd-highlight'>
+    <% if @posts.present? %>
+      <%= render @posts %>
+    <% else %>
+      <p><%= '.no_result' %></p>
+    <% end %>
+    </div>
+  
+<%= paginate @posts, theme: 'twitter-bootstrap-4'%>
 
 </div>

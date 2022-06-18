@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_26_120603) do
+ActiveRecord::Schema.define(version: 2022_06_15_155748) do
 
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2022_05_26_120603) do
     t.string "name", default: "匿名様", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "twitter_user_name"
     t.index ["twitter_id"], name: "index_users_on_twitter_id", unique: true
   end
 

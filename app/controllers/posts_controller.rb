@@ -12,6 +12,9 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    binding.pry
+    
+    # @post = current_user.posts.build(post_params(@current_user.id))
 
     # 反省文を採点する
     @post.get_sentiment
@@ -146,7 +149,6 @@ class PostsController < ApplicationController
       config.consumer_secret = ENV['TWITTER_API_SECRET']
       config.access_token = ENV['ACCESS_TOKEN']
       config.access_token_secret = ENV['ACCESS_TOKEN_SECRET']
-      # binding.pry
     end
   end
 
