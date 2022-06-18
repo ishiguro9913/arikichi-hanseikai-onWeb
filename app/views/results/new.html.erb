@@ -1,33 +1,8 @@
 <div class='w-75 p-3 mx-5 d-flex flex-column bd-highlight'>
 
   <h1>判定結果</h1>
-  
-  <div id='post-id-<%= @post.id%>', class='d-flex flex-column bd-highlight p-4'>
-  <span class='h5'>反省文</span><span class='h3'><%= @post.content %></span>
-  <span class='h5'>反省点</span><span class='h2'><%= @post.score %>点</span>
-  <span class='h5'>禊</span><span class='h3'><%= @post.ablution %></span>
-  <span class='h5'>状態</span><span class='h3'><%= @post.status %></span>
 
-  <div class="inline-radio">
-    <%
-=begin%>
- <%= form_with(model: @post, local: true) do |f| %>
-      <div>
-      <%= f.radio_button(:status, :private, name: 'member') %>
-      <%= f.label(:status, :private, value: "非公開")  %>
-      </div>
-      <div>
-      <%= f.radio_button(:status, :public, name: 'member') %>
-      <%= f.label(:status, :public, value: "公開") %>
-      </div>
-    <% end %> 
-<%
-=end%>
-  </div>
-  <span>反省人：<%= @post.name %></span>
-  <span>反省日：<%= @post.created_at.strftime('%Y/%m/%d') %></span>
-  </div>
-
+  <%= render 'post', post: @post %>
 
 <%= link_to "トップへ戻る", root_path %>
   
