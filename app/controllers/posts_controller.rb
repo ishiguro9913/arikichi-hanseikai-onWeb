@@ -12,8 +12,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    binding.pry
-    
+
     # @post = current_user.posts.build(post_params(@current_user.id))
 
     # 反省文を採点する
