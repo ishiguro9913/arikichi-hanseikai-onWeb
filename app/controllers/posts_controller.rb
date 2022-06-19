@@ -59,12 +59,23 @@ class PostsController < ApplicationController
       twitter_client.user_timeline(user_id: current_user.twitter_id, count: serch_tweet).each do |tweet|
         @tweet_aggregation <<  tweet.full_text.encode('SJIS', 'UTF-8', invalid: :replace, undef: :replace, replace: '').encode('UTF-8').gsub(/[0-9A-Za-z]/, '')
       end
-      tweet = Post.new(ablution: @tweet_aggregation)
-      tweet.tweet_diagnose
-      nagative = tweet.score
-      # @tweet_aggregation.tweet_diagnose
-      # @post.ablution = @tweet_aggregation.tweet_diagnose
-      @post.ablution = "ツイートのネガティブ度：#{nagative}"
+      @post.ablution = @tweet_aggregation 
+      @post.tweet_diagnose
+      nagative = @post.score
+
+      if 50 < nagative then 
+        puts '情動性評価：１'
+      elsif (25..49) === nagative then 
+        puts '情動性評価：２'
+      elsif (0..24) === nagative then 
+        puts '情動性評価：３'
+      elsif (-24..-1) === nagative then 
+        puts '情動性評価：４'
+      elsif -25 > nagative then 
+        puts '情動性評価：５'
+      end
+
+      @post.ablution = "ツイートのネガポジ度：#{nagative}"
 
       # ------------------------------------------------------------------------------ 
 
