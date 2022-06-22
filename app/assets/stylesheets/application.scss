@@ -62,3 +62,16 @@
   display:flex;
   flex-flow: column;
 }
+
+footer {
+  //position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0 10 0 10;
+}
+
+footer a {
+  margin: 0 10 0 10;
+}

@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = current_user
+    @posts = Post.where(user_id: current_user.id).includes(:user).order(created_at: :desc).page(params[:page]).per(10) 
   end
 
   # GET /users/1/edit
