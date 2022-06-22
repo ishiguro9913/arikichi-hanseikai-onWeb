@@ -12,11 +12,12 @@
   <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h3 class="my-0 mr-md-auto font-weight-normal">
-      <%= link_to "ひとり反省会onWeb", root_path, id: 'toptitle' %>
+      <%= link_to "ひとり", root_path, id: 'toptitle' %><%= link_to "反省", root_path, id: 'toptitle-red' %><%= link_to "会onWeb", root_path, id: 'toptitle' %>
     </h3>
     
       <nav class="my-2 my-md-0 mr-md-3">
         <% if logged_in? && twitter_logged_in? %>
+          <%= link_to "反省してみる", new_post_path, method: :get, class: "p-2 text-dark" %> |   
           <%= link_to "マイページ",user_path(@user.id), class: "p-2 text-dark" %> |
           <%= link_to "みんなの反省", posts_path, class: "p-2 text-dark" %> |
           <%= link_to "ログアウト", logout_path, method: :delete, class: "p-2 text-dark" %>

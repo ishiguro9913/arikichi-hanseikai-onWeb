@@ -23,6 +23,7 @@
   font-family: 'Yuji Syuku', serif;
  }
 
+
  .vertical {
 	-ms-writing-mode: tb-rl;
 	writing-mode: vertical-rl;
@@ -39,13 +40,25 @@
 	text-align: left;
 	display: inline-block;
 }
+
 .sample02 {
+  font-size: 4em;
 	-ms-writing-mode: tb-rl;
-	writing-mode: vertical-rl;
 	text-align: left;
 	display: inline-block;
 }  
+
 #toptitle {
-  text-decoration:none; 
+  text-decoration:none;   
   color: black;
+}
+
+#toptitle-red {
+  text-decoration:none; 
+  color: red;
+}
+
+.wrap {
+  display:flex;
+  flex-flow: column;
 }
