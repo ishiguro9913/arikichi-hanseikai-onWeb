@@ -75,28 +75,43 @@ class PostsController < ApplicationController
         puts '情動性評価：５'
       end
 
-      @post.ablution = "ツイートのネガポジ度：#{nagative}"
+      # @post.ablution = "ツイートのネガポジ度：#{nagative}"
 
       # ------------------------------------------------------------------------------ 
 
 
       # 直近の5ツイートの投稿時間からツイートの頻度を計測--------------------
-      # tweet_frequency = Array.new
-      # tweet_variance = Array.new
+      tweet_frequency = Array.new
+      tweet_variance = Array.new
 
-      # # # 直近のツイートの投稿時間を配列へ
-      # twitter_client.user_timeline(user_id: current_user.twitter_id, count: 5).each do |tweet|
-      #   tweet_frequency <<  tweet.created_at
-      # end
+      # # 直近のツイートの投稿時間を配列へ
+      twitter_client.user_timeline(user_id: current_user.twitter_id, count: 5).each do |tweet|
+        tweet_frequency <<  tweet.created_at
+      end
 
-      # # 各ツイートの投稿の間隔を配列へ
-      # for i in 1..tweet_frequency.length-1
-      #   tweet_variance << tweet_frequency[i] - tweet_frequency[i-1]
-      # end
+      # 各ツイートの投稿の間隔を配列へ
+      for i in 1..tweet_frequency.length-1
+        tweet_variance << tweet_frequency[i] - tweet_frequency[i-1]
+      end
 
-      # # 投稿時間の標準偏差を出す
-      # variance = stdev(tweet_variance).round
-      # @post.ablution = "ツイートの頻度は#{variance}"
+      # 投稿時間の標準偏差を出す
+      variance = stdev(tweet_variance).round
+      # これまで単位が秒数だったので日数に変換　おおよそ何日ごとに１ツイートしているか出す
+      variance = variance/3600/24
+
+      if 22 < variance then 
+        puts '勤勉性評価：１'
+      elsif (14..21) === variance then 
+        puts '勤勉性評価：２'
+      elsif (7..13) === variance then 
+        puts '勤勉性評価：３'
+      elsif (3..6) === variance then 
+        puts '勤勉性評価：４'
+      elsif 2 > variance then 
+        puts '勤勉性評価：５'
+      end
+      
+      @post.ablution = "ツイートの頻度は#{variance}"
 
       # --------------------------------------------------------------
 
