@@ -119,29 +119,29 @@ class PostsController < ApplicationController
 
       # その人がしているいいね数を取得　最大1000件? ------------------------------------------------
 
-      favorites = twitter_client.favorites(count: 1000).count
-      since = twitter_client.user(current_user.twitter_id.to_i).created_at
-      now = Time.now
+      # favorites = twitter_client.favorites(count: 1000).count
+      # since = twitter_client.user(current_user.twitter_id.to_i).created_at
+      # now = Time.now
 
-      period = (now - since).divmod(86400).each_slice(2).map { |day, sec_r| (Time.parse("1/1") + sec_r).strftime("#{day}") }.first.to_i
-      cooperation = (favorites/period.to_f).round(3) unless favorites.to_i > 1000 
+      # period = (now - since).divmod(86400).each_slice(2).map { |day, sec_r| (Time.parse("1/1") + sec_r).strftime("#{day}") }.first.to_i
+      # cooperation = (favorites/period.to_f).round(3) unless favorites.to_i > 1000 
 
-      if 0.5 > cooperation then 
-        puts '協調性評価：１'
-        cooperation = 1
-      elsif (0.5..1) === cooperation then 
-        puts '協調性評価：２'
-        cooperation = 2
-      elsif (1.1..) === cooperation then 
-        puts '協調性評価：３'
-        cooperation = 3
-      elsif (2.1..2.9) === cooperation then 
-        puts '協調性評価：４'
-        cooperation = 4
-      elsif 3 < cooperation then 
-        puts '協調性評価：５'
-        cooperation = 5
-      end
+      # if 0.5 > cooperation then 
+      #   puts '協調性評価：１'
+      #   cooperation = 1
+      # elsif (0.5..1) === cooperation then 
+      #   puts '協調性評価：２'
+      #   cooperation = 2
+      # elsif (1.1..) === cooperation then 
+      #   puts '協調性評価：３'
+      #   cooperation = 3
+      # elsif (2.1..2.9) === cooperation then 
+      #   puts '協調性評価：４'
+      #   cooperation = 4
+      # elsif 3 < cooperation then 
+      #   puts '協調性評価：５'
+      #   cooperation = 5
+      # end
 
       # @post.ablution = "過去にどのくらいいいねをしたのか #{cooperation}"
       # ------------------------------------------------------------------------------------
@@ -156,8 +156,28 @@ class PostsController < ApplicationController
       # tweet_total = twitter_client.user(current_user.twitter_id.to_i).tweets_count
       # since = twitter_client.user(current_user.twitter_id.to_i).created_at
       # now = Time.now
-      # period = (now - since).divmod(86400).each_slice(2).map { |day, sec_r| (Time.parse("1/1") + sec_r).strftime("#{day}日") }.first
-      # @post.ablution = "ツイートした数：#{tweet_total} ツイッター歴：#{period}" 
+      # period = (now - since).divmod(86400).each_slice(2).map { |day, sec_r| (Time.parse("1/1") + sec_r).strftime("#{day}") }.first.to_i
+
+      # extraversion =(tweet_total/period.to_f).round(3) 
+
+      # if 0 === extraversion then 
+      #   puts '外向性評価：１'
+      #   extraversion = 1
+      # elsif (0..0.5) === extraversion then 
+      #   puts '外向性評価：２'
+      #   extraversion = 2
+      # elsif (0.6..1) === extraversion then 
+      #   puts '外向性評価：３'
+      #   extraversion = 3
+      # elsif (1.1..2) === extraversion then 
+      #   puts '外向性評価：４'
+      #   extraversion = 4
+      # elsif 2 < extraversion then 
+      #   puts '外向性評価：５'
+      #   extraversion = 5
+      # end
+ 
+      # @post.ablution = "外向性は#{extraversion}" 
       # -----------------------------------------------------------------------------
     end
 
